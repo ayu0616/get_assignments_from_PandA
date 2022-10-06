@@ -1,4 +1,12 @@
+.env
+
+python/env
+
+
+node_modules
+
+
 .mypy_cache
 .__pycache__
 
-.env
+.vscode
