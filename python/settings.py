@@ -9,3 +9,5 @@ load_dotenv(dotenv_path)
 
 USER_NAME = os.environ.get("USER_NAME")
 PASSWORD = os.environ.get("PASSWORD")
+
+NOW_SEMESTER = "2022後期"
