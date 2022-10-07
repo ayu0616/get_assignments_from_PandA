@@ -7,7 +7,7 @@
     },
     {
         "id": "2022-888-R453-001",
-        "title": "[月2]中国語IIB",
+        "title": "[月2]中国語IIＢ [文法・文化理解]",
         "assignment_url": "https://panda.ecs.kyoto-u.ac.jp/portal/site/2022-888-R453-001/page/ec1d14de-cae1-4a29-8134-d5c5e7a0f3e5",
         "testquiz_url": null
     },
@@ -31,7 +31,7 @@
     },
     {
         "id": "2022-888-R453-016",
-        "title": "[月5]中国語IIB",
+        "title": "[月5]中国語IIＢ [会話・ネイティブ実習]",
         "assignment_url": "https://panda.ecs.kyoto-u.ac.jp/portal/site/2022-888-R453-016/page/ce383eda-9c43-4951-9393-b6719d97c2bf",
         "testquiz_url": null
     },
@@ -49,7 +49,7 @@
     },
     {
         "id": "2022-104-6134-000",
-        "title": "[火2]情報処理論2b",
+        "title": "[火2]情報処理論２ｂ",
         "assignment_url": "https://panda.ecs.kyoto-u.ac.jp/portal/site/2022-104-6134-000/page/759a0159-9d77-4919-aae1-cdd5945937c6",
         "testquiz_url": null
     },
@@ -67,7 +67,7 @@
     },
     {
         "id": "2022-104-6424-000",
-        "title": "[火3]特殊講義−SDGsと金 ...",
+        "title": "[火3]特殊講義－SDGsと金融・経済・社会",
         "assignment_url": "https://panda.ecs.kyoto-u.ac.jp/portal/site/2022-104-6424-000/page/0781e506-9e3e-41ca-b858-8ec3d83e9c4d",
         "testquiz_url": null
     },
@@ -91,20 +91,20 @@
     },
     {
         "id": "2022-104-6094-000",
-        "title": "[水2]社会経済学1",
+        "title": "[水2]社会経済学１",
         "assignment_url": "https://panda.ecs.kyoto-u.ac.jp/portal/site/2022-104-6094-000/page/394fcb14-8205-4368-a45c-8b49281588a1",
         "testquiz_url": null
     },
     {
         "id": "2022-104-6091-000",
-        "title": "[水3]ミクロ経済学2",
+        "title": "[水3]ミクロ経済学２",
         "assignment_url": "https://panda.ecs.kyoto-u.ac.jp/portal/site/2022-104-6091-000/page/dca9ae2f-45ca-4a67-b79f-1748721335b6",
         "testquiz_url": null
     },
     { "id": "c99b7c83-efc4-4306-acf2-b95f9823b4e8", "title": "経済学部秋田ゼミ", "assignment_url": null, "testquiz_url": null },
     {
         "id": "2022-104-6421-000",
-        "title": "[水5]特殊講義−金融リテラシー",
+        "title": "[水5]特殊講義－金融リテラシー",
         "assignment_url": "https://panda.ecs.kyoto-u.ac.jp/portal/site/2022-104-6421-000/page/5801fb1b-9f29-4a4b-bbba-6cabb8675b55",
         "testquiz_url": "https://panda.ecs.kyoto-u.ac.jp/portal/site/2022-104-6421-000/page/c472b191-f200-4aad-a56e-1c40a6bdcf8a"
     },
@@ -122,7 +122,7 @@
     },
     {
         "id": "2022-104-6093-000",
-        "title": "[木2]マクロ経済学2",
+        "title": "[木2]マクロ経済学２",
         "assignment_url": "https://panda.ecs.kyoto-u.ac.jp/portal/site/2022-104-6093-000/page/d2a7b2ee-8e2c-40bd-9c86-44f0d33cb55d",
         "testquiz_url": null
     },
@@ -140,7 +140,7 @@
     },
     {
         "id": "2022-104-6118-000",
-        "title": "[金2]計量経済学1",
+        "title": "[金2]計量経済学２",
         "assignment_url": "https://panda.ecs.kyoto-u.ac.jp/portal/site/2022-104-6118-000/page/6f822068-8f39-49b2-a8d9-5e0fc59ecdd1",
         "testquiz_url": null
     }
