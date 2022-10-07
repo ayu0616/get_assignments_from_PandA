@@ -1,9 +1,11 @@
+from datetime import datetime, timezone
+
 import requests
 from bs4 import BeautifulSoup
 
-from python.query_classes_data import QueryClassesDataType
 from python.settings import NOW_SEMESTER
-from python.task import Task
+from python.types.query_classes_data import QueryClassesDataType
+from python.types.task import Task
 from python.util.zenhantrans import zen2han
 
 
@@ -44,9 +46,9 @@ class PandaSession(requests.Session):
         if not self.is_login:
             raise Exception("ログインを完了してからこの操作を行なってください")
 
-        site_json: list[dict[str, str | int | None | list | dict]] = self.get(
-            "https://panda.ecs.kyoto-u.ac.jp/direct/site.json?_limit=200"
-        ).json()["site_collection"]
+        site_json: list[dict[str, str | int | None | list | dict]] = self.get("https://panda.ecs.kyoto-u.ac.jp/direct/site.json?_limit=200").json()[
+            "site_collection"
+        ]
 
         query_data: list[QueryClassesDataType] = []
         for site in site_json:
@@ -77,9 +79,38 @@ class PandaSession(requests.Session):
         return query_data
 
     def get_assignments(self, data: QueryClassesDataType) -> list[Task]:
-        url = data["assignment_url"]
-        if not url:
-            return []
+        url = f'https://panda.ecs.kyoto-u.ac.jp/direct/assignment/site/{data["id"]}.json'
 
-        tasks: list[Task] = []
+        asm_list: list[dict[str, str]] = self.get(url).json()["assignment_collection"]
+
+        def extract_data(asm_json: dict[str, str]) -> Task:
+            return {
+                "title": asm_json["title"],
+                "class_name": data["title"],
+                "panda_id": asm_json["id"],
+                "due_date": asm_json["dueTimeString"],
+                "url": asm_json["entityURL"],
+                "last_fixed_date": datetime.now(tz=timezone.utc).isoformat(timespec="seconds"),
+            }
+
+        tasks: list[Task] = [extract_data(asm) for asm in asm_list]
+        return tasks
+
+    def get_testquiz(self, data: QueryClassesDataType) -> list[Task]:
+        url = f'https://panda.ecs.kyoto-u.ac.jp/direct/sam_pub/context/{data["id"]}.json'
+
+        tq_list: list[dict[str, str]] = self.get(url).json()["sam_pub_collection"]
+
+        def extract_data(tq_json: dict[str, str]) -> Task:
+            id = str(tq_json["publishedAssessmentId"])
+            return {
+                "title": tq_json["title"],
+                "class_name": data["title"],
+                "panda_id": id,
+                "due_date": datetime.fromtimestamp(int(tq_json["dueDate"]) / 10**3, tz=timezone.utc).isoformat(timespec="seconds"),
+                "url": tq_json["entityURL"] + "/" + id,
+                "last_fixed_date": datetime.now(tz=timezone.utc).isoformat(timespec="seconds"),
+            }
+
+        tasks: list[Task] = [extract_data(asm) for asm in tq_list]
         return tasks
