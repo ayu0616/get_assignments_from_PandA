@@ -4,7 +4,6 @@ python/env
 
 
 node_modules
-
 .clasp.json
 
 .mypy_cache
