@@ -7,8 +7,8 @@ type PostData = {
     last_fixed_date: string;
 };
 
-const doGet = (e: GoogleAppsScript.Events.DoPost) => {
-    const postDataList: PostData[] = JSON.parse(e.postData.contents);
+const doPost = (e: GoogleAppsScript.Events.DoPost) => {
+    const postDataList: PostData[] = JSON.parse(e.parameter["panda_data"]);
 
     const ss = SpreadsheetApp.openById("1e12Qak103dxHgXPP0oG_oWZAEyqAUrIEO5zCvDNWBv8");
     const sheetName = "tasks";
@@ -30,4 +30,16 @@ const doGet = (e: GoogleAppsScript.Events.DoPost) => {
 
     const maxRow = sheet.getMaxRows();
     sheet.getRange(2, 1, maxRow - 1, headers.length).setValues(addValues);
+
+    const response = ContentService.createTextOutput();
+    // Mime TypeをJSONに設定
+    response.setMimeType(ContentService.MimeType.JSON);
+    const body = {
+        code: 200,
+        text: "ok",
+    };
+    // JSONテキストをセットする
+    response.setContent(JSON.stringify(body));
+
+    return response;
 };
