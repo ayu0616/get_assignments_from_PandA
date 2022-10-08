@@ -28,8 +28,7 @@ const doPost = (e: GoogleAppsScript.Events.DoPost) => {
         addValues.push(row);
     });
 
-    const maxRow = sheet.getMaxRows();
-    sheet.getRange(2, 1, maxRow - 1, headers.length).setValues(addValues);
+    sheet.getRange(2, 1, addValues.length, headers.length).setValues(addValues);
 
     const response = ContentService.createTextOutput();
     // Mime TypeをJSONに設定
