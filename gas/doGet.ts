@@ -7,7 +7,7 @@ type PostData = {
     last_fixed_date: string;
 };
 
-const doPost = (e: GoogleAppsScript.Events.DoPost) => {
+const doGet = (e: GoogleAppsScript.Events.DoPost) => {
     const postDataList: PostData[] = JSON.parse(e.postData.contents);
 
     const ss = SpreadsheetApp.openById("1e12Qak103dxHgXPP0oG_oWZAEyqAUrIEO5zCvDNWBv8");
