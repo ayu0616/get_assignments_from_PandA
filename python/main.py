@@ -1,4 +1,5 @@
 from panda_session import PandaSession
+from python.types.task import Task
 from settings import PASSWORD, USER_NAME
 
 
@@ -8,7 +9,7 @@ def main():
 
     class_data = session.query_classes()
 
-    task_data = []
+    task_data: list[Task] = []
     for d in class_data:
         asm = session.get_assignments(d)
         tq = session.get_testquiz(d)
