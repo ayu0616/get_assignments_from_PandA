@@ -122,3 +122,5 @@ const doGet = () => {
     const valueData = getValueData(dataRange);
     return response(valueData);
 };
+
+const syncNotion = () => {};
