@@ -50,7 +50,7 @@ const getValueData = (allRange: GoogleAppsScript.Spreadsheet.Range) => {
     }
 };
 
-const response = () => {
+const postResponse = () => {
     const res = ContentService.createTextOutput();
     // Mime TypeをJSONに設定
     res.setMimeType(ContentService.MimeType.JSON);
@@ -101,7 +101,7 @@ const doPost = (e: GoogleAppsScript.Events.DoPost) => {
             add(JSON.parse(param.panda_data));
     }
 
-    return response();
+    return postResponse();
 };
 
 const doGet = () => {
