@@ -1,6 +1,3 @@
-// 定数設定
-const SHEET_ID = "1e12Qak103dxHgXPP0oG_oWZAEyqAUrIEO5zCvDNWBv8";
-
 // 型設定
 type PostParameter = {
     type: "add";
