@@ -103,3 +103,16 @@ const doPost = (e: GoogleAppsScript.Events.DoPost) => {
 
     return response();
 };
+
+const doGet = () => {
+    const ss = SpreadsheetApp.openById(SHEET_ID);
+    const sheetName = "tasks";
+    const sheet = ss.getSheetByName(sheetName);
+    if (!sheet) {
+        throw new Error(`"${sheetName}" という名前のシートは存在しません`);
+    }
+
+    const dataRange = sheet.getDataRange();
+    const valueData = getValueData(dataRange);
+    return JSON.stringify(valueData)
+}
