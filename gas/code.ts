@@ -60,47 +60,49 @@ const response = (body: Object | string) => {
     return res;
 };
 
-const postResponse = () => {
-    const body = {
-        code: 200,
-        text: "ok",
+const doPost = (e: GoogleAppsScript.Events.DoPost) => {
+    // ここから定義
+    const add = (pandaDataList: PandaData[]) => {
+        const ss = SpreadsheetApp.openById(SHEET_ID);
+        const sheetName = "tasks";
+        const sheet = ss.getSheetByName(sheetName);
+        if (!sheet) {
+            throw new Error(`"${sheetName}" という名前のシートは存在しません`);
+        }
+
+        const dataRange = sheet.getDataRange();
+        const valueData = getValueData(dataRange);
+        const headers = Object.keys(valueData[0]) as (keyof Data)[];
+
+        const addValues: string[][] = [];
+        pandaDataList.forEach((pandaData) => {
+            // 追加データが既存データと重複していないか確認する
+            const pandaIds = valueData.map((d) => d["panda_id"]);
+            const pandaIdIndex = pandaIds.indexOf(pandaData["panda_id"]); //panda_idのインデックス（新規データなら-1になる）
+
+            if (pandaIdIndex === -1) {
+                const addRow: string[] = new Array(headers.length).fill("");
+                (Object.keys(pandaData) as (keyof PandaData)[]).forEach((key) => (addRow[headers.indexOf(key)] = pandaData[key]));
+                addValues.push(addRow);
+            } else {
+                //TODO: 既存のデータを更新するプログラムを書く
+            }
+        });
+
+        sheet.getRange(sheet.getLastRow() + 1, 1, addValues.length, headers.length).setValues(addValues);
     };
 
-    const res = response(body);
-    return res;
-};
+    const postResponse = () => {
+        const body = {
+            code: 200,
+            text: "ok",
+        };
 
-const add = (pandaDataList: PandaData[]) => {
-    const ss = SpreadsheetApp.openById(SHEET_ID);
-    const sheetName = "tasks";
-    const sheet = ss.getSheetByName(sheetName);
-    if (!sheet) {
-        throw new Error(`"${sheetName}" という名前のシートは存在しません`);
-    }
+        const res = response(body);
+        return res;
+    };
 
-    const dataRange = sheet.getDataRange();
-    const valueData = getValueData(dataRange);
-    const headers = Object.keys(valueData[0]) as (keyof Data)[];
-
-    const addValues: string[][] = [];
-    pandaDataList.forEach((pandaData) => {
-        // 追加データが既存データと重複していないか確認する
-        const pandaIds = valueData.map((d) => d["panda_id"]);
-        const pandaIdIndex = pandaIds.indexOf(pandaData["panda_id"]); //panda_idのインデックス（新規データなら-1になる）
-
-        if (pandaIdIndex === -1) {
-            const addRow: string[] = new Array(headers.length).fill("");
-            (Object.keys(pandaData) as (keyof PandaData)[]).forEach((key) => (addRow[headers.indexOf(key)] = pandaData[key]));
-            addValues.push(addRow);
-        } else {
-            //TODO: 既存のデータを更新するプログラムを書く
-        }
-    });
-
-    sheet.getRange(sheet.getLastRow() + 1, 1, addValues.length, headers.length).setValues(addValues);
-};
-
-const doPost = (e: GoogleAppsScript.Events.DoPost) => {
+    // ここから実行
     const param = e.parameter as PostParameter;
     switch (param.type) {
         case "add":
