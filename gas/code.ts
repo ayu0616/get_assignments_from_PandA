@@ -50,17 +50,26 @@ const getValueData = (allRange: GoogleAppsScript.Spreadsheet.Range) => {
     }
 };
 
-const postResponse = () => {
+const response = (body: Object | string) => {
     const res = ContentService.createTextOutput();
-    // Mime TypeをJSONに設定
-    res.setMimeType(ContentService.MimeType.JSON);
+    res.setMimeType(ContentService.MimeType.JSON); // Mime TypeをJSONに設定
+
+    switch (typeof body) {
+        case "string":
+            res.setContent(body);
+        case "object":
+            res.setContent(JSON.stringify(body)); // JSONテキストをセットする
+    }
+    return res;
+};
+
+const postResponse = () => {
     const body = {
         code: 200,
         text: "ok",
     };
-    // JSONテキストをセットする
-    res.setContent(JSON.stringify(body));
 
+    const res = response(body);
     return res;
 };
 
@@ -114,5 +123,5 @@ const doGet = () => {
 
     const dataRange = sheet.getDataRange();
     const valueData = getValueData(dataRange);
-    return JSON.stringify(valueData)
-}
+    return response(valueData);
+};
